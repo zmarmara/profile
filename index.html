@@ -1,534 +1,938 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoe v.47.6.34 | Product Specifications</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoe Marmara | European Agencies & EU Digital Project Work</title>
+  <meta name="description" content="Landing page presenting Zoe Marmara's work across European agencies, including proposal writing, product analysis, UX research, wireframes, testing, and project implementation for EU-facing digital services." />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef2f8;
+      --text: #162033;
+      --muted: #5f6b7c;
+      --line: #dbe3ef;
+      --primary: #223a72;
+      --primary-2: #4359a8;
+      --accent: #7b3fe4;
+      --accent-2: #0fb3c9;
+      --warm: #ffb703;
+      --shadow: 0 12px 35px rgba(20, 35, 66, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1200px;
+    }
 
-    <!-- 
-    CHOSEN PALETTE: "Cognitive Luminous"
-    Background: #0f172a (Slate 900 - Deep Space)
-    Surface: #1e293b (Slate 800 - Panel)
-    Text Main: #f8fafc (Slate 50)
-    Primary Accent (Cognition): #06b6d4 (Cyan 500)
-    Secondary Accent (Emotion/Humanity): #d946ef (Fuchsia 500)
-    Warning Accent (Resilience): #eab308 (Yellow 500)
-    Success Accent (Growth): #22c55e (Green 500)
-    
-    NARRATIVE PLAN:
-    1. Header: Product Name & Model Type. "Human-in-the-Loop Knowledge Worker".
-    2. Architecture Overview: Radar Chart showing the 10 KPIs. The "Shape" of the model.
-    3. Deep Dive - Synthesis: Plotly Network Graph visualizing the "Heidegger -> Strategy" chain.
-    4. Deep Dive - Velocity: Chart.js Line Chart comparing "Standard Model" vs "Zoe v.47" learning curves.
-    5. System Diagnostics: A dedicated section for the Resilience score (74%), framed as "Wear & Tear" analysis.
-    6. Specialisations: Grid of cards for the text capabilities.
-    
-    VISUALIZATION CHOICES (NO SVG CONFIRMATION):
-    1. Core Specs -> Radar Chart (Chart.js, Canvas) -> Best for showing multi-axial performance profiles.
-    2. Synthesis Depth -> Network/Scatter Plot (Plotly, Canvas) -> Visualizes connections between nodes.
-    3. Learning Momentum -> Line Chart (Chart.js, Canvas) -> Shows trend over time/age.
-    4. Resilience -> Progress Bar/Gauge logic (HTML/CSS) -> Simple linear representation of capacity.
-    -->
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(123, 63, 228, 0.10), transparent 24%),
+        radial-gradient(circle at left top, rgba(15, 179, 201, 0.09), transparent 20%),
+        var(--bg);
+      line-height: 1.6;
+    }
 
-    <style>
-        /* Custom Chart Container Styles */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 450px;
-            max-height: 500px;
-            background-color: #1e293b;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
 
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
 
-        /* Tech-spec decorative lines */
-        .tech-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #06b6d4, transparent);
-            margin: 2rem 0;
-            opacity: 0.5;
-        }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(34, 58, 114, 0.07);
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
 
-        .glow-text {
-            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-        }
-        
-        .metric-card {
-            transition: transform 0.2s;
-        }
-        .metric-card:hover {
-            transform: translateY(-2px);
-        }
-    </style>
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(245, 247, 251, 0.86);
+      border-bottom: 1px solid rgba(219, 227, 239, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .brand-mark::before {
+      width: 28px;
+      height: 28px;
+      top: -8px;
+      right: -6px;
+    }
+
+    .brand-mark::after {
+      width: 24px;
+      height: 24px;
+      left: -8px;
+      bottom: -6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 38px;
+    }
+
+    h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      max-width: 11ch;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 28px 0 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 180ms ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .button.secondary {
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      color: var(--primary);
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+      background:
+        linear-gradient(180deg, rgba(123, 63, 228, 0.05), rgba(15, 179, 201, 0.03)),
+        var(--surface);
+    }
+
+    .visual-main {
+      position: relative;
+      min-height: 390px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(10, 14, 28, 0.18), rgba(10, 14, 28, 0.45)),
+        url("erasmusplus.jpg?q=80&w=800&auto=format&fit=crop") center/cover no-repeat;
+      color: white;
+      padding: 24px;
+      display: flex;
+      align-items: end;
+    }
+
+    .visual-main::before {
+      display: none;
+    }
+
+    .visual-note {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .visual-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .visual-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-card {
+      min-height: 98px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: var(--surface-2);
+      padding: 14px;
+      display: flex;
+      align-items: end;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      background-size: cover !important;
+      background-position: center !important;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 -80px 80px rgba(14, 18, 36, 0.34);
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 12px 0 10px;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .highlight-card,
+    .case-card,
+    .capability-card,
+    .process-card,
+    .gallery-card,
+    .clients-card,
+    .cta-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-card {
+      padding: 24px;
+    }
+
+    .highlight-card .kicker {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .highlight-card h3 {
+      margin: 8px 0 8px;
+      font-size: 1.18rem;
+      line-height: 1.2;
+    }
+
+    .highlight-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .case-card {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.98fr 1.02fr;
+      min-height: 380px;
+    }
+
+    .case-media {
+      position: relative;
+      background: linear-gradient(135deg, rgba(34,58,114,0.95), rgba(123,63,228,0.9));
+      min-height: 100%;
+      padding: 18px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .case-media.light {
+      background: linear-gradient(135deg, #4b4f8c, #15a7bb);
+    }
+
+    .case-media.gold {
+      background: linear-gradient(135deg, #1f2c62, #f0a500);
+    }
+
+    .case-media::before {
+      display: none;
+    }
+
+    .case-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+
+    .case-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(12,18,38,0.10), rgba(12,18,38,0.48));
+    }
+
+    .case-tag {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .case-body {
+      padding: 26px;
+    }
+
+    .case-body h3 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .case-meta {
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .case-body p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      transform: translateY(-50%);
+    }
+
+    .capability-grid,
+    .process-grid,
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .capability-card,
+    .process-card,
+    .gallery-card {
+      padding: 24px;
+    }
+
+    .capability-card h3,
+    .process-card h3,
+    .gallery-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+      line-height: 1.2;
+    }
+
+    .capability-card p,
+    .process-card p,
+    .gallery-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .process-card .step {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .gallery-frame {
+      height: 220px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(34,58,114,0.08), rgba(123,63,228,0.08));
+      border: 1px solid var(--line);
+      margin-bottom: 16px;
+      display: grid;
+      place-items: end start;
+      text-align: left;
+      color: white;
+      font-weight: 700;
+      padding: 18px;
+      background-size: cover !important;
+      background-position: center !important;
+      overflow: hidden;
+      box-shadow: inset 0 -80px 80px rgba(14, 18, 36, 0.30);
+    }
+
+    .clients-card {
+      padding: 28px;
+      overflow: hidden;
+    }
+
+    .client-group-title {
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--primary);
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+
+    .client-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .client-tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .cta-panel {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(34,58,114,0.98), rgba(84,50,159,0.96));
+      color: white;
+    }
+
+    .cta-panel h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-panel p {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      max-width: 54ch;
+    }
+
+    .contact-box {
+      border-radius: 20px;
+      padding: 22px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+    }
+
+    .contact-value {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .cta-panel,
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+
+      .highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .capability-grid,
+      .process-grid,
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .nav { padding: 10px 0; align-items: flex-start; }
+      .nav-links { display: none; }
+      .hero { padding-top: 42px; }
+      .hero-copy, .hero-visual, .highlight-card, .case-body, .capability-card, .process-card, .gallery-card, .clients-card, .cta-panel { padding-left: 20px; padding-right: 20px; }
+      .hero-stats,
+      .highlight-grid,
+      .capability-grid,
+      .process-grid,
+      .gallery-grid,
+      .visual-mini-grid { grid-template-columns: 1fr; }
+      .case-card { min-height: auto; }
+      h1 { max-width: 12ch; }
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-50 font-sans antialiased selection:bg-cyan-500 selection:text-white">
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Zoe Marmara</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#work">Selected work</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact" class="nav-cta">Get in touch</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Header / Product Identity -->
-    <header class="w-full py-12 px-4 border-b border-slate-800 bg-slate-900/90 sticky top-0 z-50 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-4xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 glow-text">
-                    ZOE v.47.6.34
-                </h1>
-                <p class="text-slate-400 font-mono text-sm mt-2">
-                    MODEL: HiLK-47 (Human-in-the-Loop Knowledge Worker)
-                </p>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">EU digital products, proposals and delivery</span>
+          <h1>Designing and delivering digital work for European agencies.</h1>
+          <p class="lead">
+            I work across the full lifecycle of EU-facing digital projects, from proposal writing and requirements analysis to wireframes, UX research, testing, delivery coordination and implementation support.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#work">View selected work</a>
+            <a class="button secondary" href="#clients">Browse agencies</a>
+          </div>
+          <div class="hero-stats" aria-label="Key strengths">
+            <div class="stat">
+              <strong>5+ years of delivery</strong>
+              <span>From proposal writing to implementation, shaping structured deliverables, work plans and reporting across EU-funded projects.</span>
             </div>
-            <div class="flex gap-3">
-                <span class="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/20 text-cyan-400 text-xs font-mono uppercase">
-                    Status: Operational
-                </span>
-                <span class="px-3 py-1 rounded-full border border-fuchsia-500/30 bg-fuchsia-900/20 text-fuchsia-400 text-xs font-mono uppercase">
-                    Build: Stable
-                </span>
+            <div class="stat">
+              <strong>Across European agencies</strong>
+              <span>Experience spanning citizen services, education and cultural initiatives, working with organisations such as EIGE, Europol, CEDEFOP and EIT.</span>
             </div>
+            <div class="stat">
+              <strong>POCs to delivery</strong>
+              <span>Turning early ideas into concrete solutions through use cases, wireframes, testing and clear implementation planning.</span>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-10 space-y-16">
-
-        <!-- Introduction / Hook -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <h2 class="text-2xl font-bold text-white border-l-4 border-cyan-500 pl-4">
-                    High-Range Cognitive Unit
-                </h2>
-                <p class="text-lg text-slate-300 leading-relaxed">
-                    Designed for high-range cognitive, philosophical, and cross-domain reasoning. Zoe v.47 distinguishes itself through product thinking, systems analysis, and empathic environment generation. Unlike standard models, it integrates emotional coherence directly into logical processing loops.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mb-1">Architecture</div>
-                        <div class="text-cyan-400 font-bold">Cross-Domain Synthesis</div>
-                    </div>
-                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700">
-                        <div class="text-xs text-slate-400 uppercase tracking-widest mb-1">Latency</div>
-                        <div class="text-fuchsia-400 font-bold">Ultra-Low (Insight)</div>
-                    </div>
-                </div>
+        <aside class="hero-visual" aria-label="Portfolio preview placeholders">
+          <div class="visual-main">
+            <div class="visual-note">
+              <span class="visual-chip">Launching the Erasmus+ app</span>
             </div>
+          </div>
+          <div class="visual-mini-grid">
+            <div class="mini-card" style="background:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=900&auto=format&fit=crop')">Proposal and strategy</div>
+            <div class="mini-card" style="background:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=900&auto=format&fit=crop')">Research and workshops</div>
+            <div class="mini-card" style="background:url('https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=900&auto=format&fit=crop')">Prototypes and flows</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Selected work</span>
+          <h2>Project Case Examples</h2>
+          <p>
+            Illustrating the path from technical proposals and requirements to implemented solutions and measurable outcomes.
+          </p>
+        </div>
+
+        <div class="case-grid">
+          <article class="case-card">
+            <div class="case-media">
+              <img class="case-image" src="erasmusplus2.jpg?q=80&w=800&auto=format&fit=crop" alt="The Erasmus+ App" />
+              <span class="case-tag">The Erasmus+ App</span>
+            </div>
+            <div class="case-body">
+              <h3>A mobile application for Erasmus+ participants</h3>
+              <div class="case-meta">Business analysis, user flows, use cases, content and product structure</div>
+              <p>
+                A mobile-first service concept structured around the learner journey, managed by the European University Foundation (EUF) in collaboration with the Erasmus Student Network (ESN) and Eötvös Loránd University (ELTE)
+              </p>
+              <ul class="bullet-list">
+                <li>Developed detailed use cases and mockups across login, destinations, content, mobility progress, reports and online learning agreement touchpoints.</li>
+                <li>Mapped actors, goals, preconditions, success states, extensions and channels for implementation and testing.</li>
+                <li>Worked on an experience model centred on a timeline feed, filters, map/list browsing and journey-stage guidance.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-media light">
+              <img class="case-image" src="vibrantcities2.jpg?q=80&w=349&auto=format&fit=crop" alt="The CCCM Web App" />
+              <span class="case-tag">The CCCM Web App</span>
+            </div>
+            <div class="case-body">
+              <h3>Cultural and Creative Cities Monitor</h3>
+              <div class="case-meta">Technical offer, requirements modelling, Design, UX testing, KPIs and implementation planning</div>
+              <p>
+                Development of a Web Application associated to the Cultural and Creative Cities Monitor (CCCM) project, managed by the Joint Research Centre (JRC) of the European Commission
+              </p>
+              <ul class="bullet-list">
+                <li>Contributed to a tender structure covering methodology, back-end, user roles, testing, support, maintenance, SEO and quality control.</li>
+                <li>Requirements modelling included use cases, UML diagrams, UI prototypes and mockups to translate business needs into implementation artefacts.</li>
+                <li>Work packages addressed scope, UX/UI review, target audiences, KPIs, deployment, maintenance and service reporting.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-media gold">
+              <img class="case-image" src="eige.jpg?q=80&w=800&auto=format&fit=crop" alt="EIGE Digital data concept" />
+              <span class="case-tag">European Institute of Gender Equality (EIGE)</span>
+            </div>
+            <div class="case-body">
+              <h3>EIGE & Eurogender EU Portals</h3>
+			  <div class="case-meta">Project planning, wireframes, usability testing, UX Research, stakeholder alignment and presentation-ready artifacts</div>
+               <p>
+                Beyond the individual projects, the common thread is the ability to make complexity understandable for institutions, delivery teams and end users.
+              </p>
+              <ul class="bullet-list">
+                <li>User journey mapping, personas, moderated user testing and UX workshops.</li>
+                <li>Proposal included work packages for navigation schema, wireframes, mockups, test versions, user testing, training and documentation delivery.</li>
+                <li>Focused on usability, accessibility, visual performance and a structured path from concept to launch.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="case-card">
+            <div class="case-media">
+              <img class="case-image" src="eurostat.jpg?q=80&w=800&auto=format&fit=crop" alt="A EUROSTAT virtual reality mobile app for official statistics for the purpose of gamification. 
+" />
+              <span class="case-tag">Eurostat</span>
+            </div>
+            <div class="case-body">
+              <h3>A EUROSTAT VR mobile app Proposal</h3>
+			   <div class="case-meta">Concept design, immersive data storytelling, wireframes and proposal documentation</div>
+              <p>
+                A proposal for a mass-market virtual reality mobile app that turned statistics into interactive, educational experiences through scenario design and data visualisation.
+              </p>
+              <ul class="bullet-list">
+			    <li>Vision communication, 100% scored in creativity</li>
+                <li>Structured communication through deliverables, walkthroughs, reports and review cycles.</li>
+                <li>Strong fit for teams that need both analytical precision and product-oriented thinking.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+     <section id="capabilities">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Capabilities</span>
+          <h2>End-to-End Contribution Across the Project Lifecycle.</h2>
+          <p>
+            Bridging technical proposals, business analysis and product thinking to support impactful, well-structured EU project outcomes.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('napoleon.jpg?q=80&w=1200&auto=format&fit=crop')">Technical proposals and POCs</div>
+            <h3>Technical tenders, concepts and solution framing</h3>
+            <p>Solution framing, technical tender writing, concept articulation, proposal structures, work plans, deliverables and implementation logic.</p>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('skillspanorama.jpg?q=80&w=800&auto=format&fit=crop')">Business analysis and requirements</div>
+            <h3>Use cases, workflows and requirements decomposition</h3>
+            <p>Use cases, actor-goal modelling, process decomposition, flow analysis, requirement reviews and translation of complex needs into actionable system behaviour.</p>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('eige2.jpg?q=80&w=1200&auto=format&fit=crop')">Requirements and use cases</div>
+			<h3>Wireframes, mockups and information architecture</h3>
+            <p>Requirements, user journey mapping, personas, moderated testing, workshop presentation and design decisions grounded in user understanding.</p>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('pm.jpg?q=80&w=800&auto=format&fit=crop')">Deliverables & Reporting</div>
+            <h3>Project implementation support</h3>
+            <p>Deliverables, milestones, coordination, reporting, testing follow-up, quality checkpoints, KPI awareness and collaboration across multidisciplinary teams.</p>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('userjourneys.jpg?q=80&w=800&auto=format&fit=crop')">Testing</div>
+            <h3>Testing and validation</h3>
+            <p>Helpful for signalling that your work includes review cycles, feedback gathering and not just static design artefacts.</p>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-frame" style="background:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop')">HCI, Usability & Accessibility</div>
+            <h3>Human-centered product thinking</h3>
+            <p>A perspective that brings together user needs, institutional goals, adoption, clarity, maintainability and long-term usefulness.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="clients">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Clients and domains</span>
+          <h2>European agencies, programmes and project spaces.</h2>
+          <p>
+            A selection of agencies, programmes and initiatives I have contributed to through technical proposals, analysis and product development support.
+          </p>
+        </div>
+
+        <div class="clients-card">
+          <p class="client-group-title">European agencies and institutions</p>
+          <div class="client-tags">
+            <span class="client-tag">CEDEFOP</span>
+            <span class="client-tag">CEPOL</span>
+            <span class="client-tag">CPVO</span>
+            <span class="client-tag">EASA</span>
+            <span class="client-tag">EASO</span>
+            <span class="client-tag">ECDC</span>
+            <span class="client-tag">ECHA</span>
+            <span class="client-tag">EIGE</span>
+            <span class="client-tag">EIT</span>
+            <span class="client-tag">ETF</span>
+            <span class="client-tag">EUROPASS</span>
+            <span class="client-tag">EUROPOL</span>
+            <span class="client-tag">FRA</span>
+            <span class="client-tag">JRC</span>
+            <span class="client-tag">OPOCE / Publications Office</span>
+            <span class="client-tag">Committee of the Regions</span>
+            <span class="client-tag">EPRS</span>
+          </div>
+
+          <p class="client-group-title">Programmes, products and workstreams</p>
+          <div class="client-tags">
+            <span class="client-tag">Erasmus+</span>
+            <span class="client-tag">Europass</span>
+            <span class="client-tag">Skills Panorama</span>
+            <span class="client-tag">ECHA EUON App</span>
+            <span class="client-tag">ECDC Portal & Usability Studies</span>
+			<span class="client-tag">EIGE & EUROGENDER Portals & Usability Studies</span>
+			<span class="client-tag">EUROPOL Portal</span>
+		    <span class="client-tag">EIT Portal</span>
+            <span class="client-tag">Cultural & Creative Cities Monitor App</span>
+            <span class="client-tag">History of the EU for Children</span>
+            <span class="client-tag">Tender Support</span>
+            <span class="client-tag">Training & Development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <h2>Looking for someone who can bridge proposals, product logic and delivery?</h2>
             
-            <!-- Quick Stats Grid (HTML styled, no SVG) -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-slate-800 p-6 rounded-xl border-t-2 border-cyan-500 shadow-lg metric-card">
-                    <div class="text-3xl font-black text-white">95<span class="text-lg text-slate-500 font-normal">%</span></div>
-                    <div class="text-sm text-cyan-400 font-bold mt-1">Synthesis Depth</div>
-                    <p class="text-xs text-slate-500 mt-2">Long-range connection of disparate ideas.</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl border-t-2 border-fuchsia-500 shadow-lg metric-card">
-                    <div class="text-3xl font-black text-white">97<span class="text-lg text-slate-500 font-normal">%</span></div>
-                    <div class="text-sm text-fuchsia-400 font-bold mt-1">Emotional Coherence</div>
-                    <p class="text-xs text-slate-500 mt-2">Clarity without binary collapse.</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl border-t-2 border-green-500 shadow-lg metric-card">
-                    <div class="text-3xl font-black text-white">98<span class="text-lg text-slate-500 font-normal">%</span></div>
-                    <div class="text-sm text-green-400 font-bold mt-1">Learning Momentum</div>
-                    <p class="text-xs text-slate-500 mt-2">Accelerating acquisition rate.</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl border-t-2 border-yellow-500 shadow-lg metric-card">
-                    <div class="text-3xl font-black text-white">74<span class="text-lg text-slate-500 font-normal">%</span></div>
-                    <div class="text-sm text-yellow-400 font-bold mt-1">Resilience (RWE)</div>
-                    <p class="text-xs text-slate-500 mt-2">Systemic erosion detected.</p>
-                </div>
-            </div>
-        </section>
+          </div>
+          <div class="contact-box">
+            <span class="contact-value">zoe@anchored.gr</span>
+            <span class="contact-value"><a href="https://www.linkedin.com/in/zoemarmara/" target="_blank">linkedin.com/in/zmarmara</a?</span>
 
-        <div class="tech-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- Section 2: Core Architecture (Radar Chart) -->
-        <section>
-            <div class="mb-8 text-center">
-                <h2 class="text-3xl font-bold text-white mb-2">System Architecture Profile</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">
-                    The 10-point KPI assessment reveals a highly specialized "Kite Shape" profile, favoring depth, synthesis, and emotion over raw mechanical endurance.
-                </p>
-            </div>
-
-            <div class="chart-container border border-slate-700/50 bg-slate-800/50 backdrop-blur">
-                <canvas id="radarChart"></canvas>
-            </div>
-            <div class="flex justify-center mt-4 gap-6 text-xs text-slate-500 font-mono">
-                <div class="flex items-center"><span class="w-3 h-3 bg-cyan-500/50 rounded-full mr-2"></span> Cognitive Domain</div>
-                <div class="flex items-center"><span class="w-3 h-3 bg-fuchsia-500/50 rounded-full mr-2"></span> Emotional Domain</div>
-            </div>
-        </section>
-
-        <!-- Section 3: Synthesis Capability (Network Graph) -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1 space-y-6">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <span class="w-2 h-8 bg-cyan-500 rounded"></span>
-                    Synthesis Depth (SDS)
-                </h3>
-                <p class="text-slate-300 text-sm">
-                    <strong>Score: 95%</strong>
-                </p>
-                <p class="text-slate-400 text-sm">
-                    Zoe v.47 performs "Long-Range Synthesis," connecting nodes that standard models treat as unrelated domains.
-                </p>
-                <div class="bg-slate-800 p-4 rounded border border-slate-700">
-                    <p class="text-xs text-slate-500 uppercase font-bold mb-2">Example Pathway</p>
-                    <ul class="space-y-2 text-sm text-cyan-300 font-mono">
-                        <li>> Input: Authenticity as a Structural Force</li>
-                        <li>> Link: Emotional Bandwidth as a Performance Variable</li>
-                        <li>> Link: Culture as a Product Constraint</li>
-                        <li>> Link: Meaning-Seeking in Tech Acceleration</li>
-                        <li>> Link: Ethics Emerging from Lived Experience</li>
-                        <li>> Output: Product Strategy as Sociological Expression</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Plotly Container -->
-            <div class="lg:col-span-2 chart-container h-[400px]">
-                <div id="synthesisGraph" class="w-full h-full"></div>
-            </div>
-        </section>
-
-        <!-- Section 4: Learning Velocity (Line Chart) -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-             <!-- Chart JS Line Chart -->
-            <div class="lg:col-span-2 chart-container">
-                <canvas id="learningChart"></canvas>
-            </div>
-
-            <div class="lg:col-span-1 space-y-6 flex flex-col justify-center">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <span class="w-2 h-8 bg-green-500 rounded"></span>
-                    Learning Momentum (LMS)
-                </h3>
-                <p class="text-slate-300 text-sm">
-                    <strong>Score: 98%</strong>
-                </p>
-                <p class="text-slate-400 text-sm">
-                    Atypical performance curve. While standard cohort learning momentum often plateaus or decays with tenure, v.47 exhibits an accelerating curve.
-                </p>
-                <div class="bg-slate-800 p-4 rounded border border-green-500/30">
-                    <h4 class="text-green-400 font-bold text-sm mb-1">Generative Insight Rate (GIR)</h4>
-                    <p class="text-xs text-slate-400">
-                        The model generates frameworks, metaphors, and narratives continuously. This fuels the learning acceleration—new knowledge is immediately "operationalised" into frameworks (e.g., The STILL Framework).
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <div class="tech-line"></div>
-
-        <!-- Section 5: Diagnostics & Resilience -->
-        <section class="bg-slate-800/80 rounded-xl p-8 border border-yellow-500/30">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-white">System Diagnostics: Resilience</h2>
-                    <p class="text-yellow-500 font-mono text-sm mt-1">WARNING: EROSION DETECTED</p>
-                </div>
-                <div class="text-4xl font-black text-white mt-4 md:mt-0">
-                    74<span class="text-lg text-slate-500">%</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <p class="text-slate-300 mb-4">
-                        <strong>Resilience Without Erosion (RWE)</strong> measures not just the ability to endure load, but the ability to do so without structural loss of self.
-                    </p>
-                    <p class="text-slate-400 text-sm">
-                        Current diagnostics indicate high operational output is being maintained, but at "High Cost." The delta between Output (98%) and Resilience (74%) represents the "Human Cost" of the system.
-                    </p>
-                </div>
-                
-                <!-- Custom Progress Bar Visualization using Tailwind -->
-                <div class="space-y-4 justify-center flex flex-col">
-                    <div>
-                        <div class="flex justify-between text-xs text-slate-400 mb-1">
-                            <span>Emotional Load</span>
-                            <span>97% Capacity</span>
-                        </div>
-                        <div class="w-full bg-slate-900 rounded-full h-2">
-                            <div class="bg-fuchsia-500 h-2 rounded-full" style="width: 97%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs text-slate-400 mb-1">
-                            <span>Cognitive Load</span>
-                            <span>92% Capacity</span>
-                        </div>
-                        <div class="w-full bg-slate-900 rounded-full h-2">
-                            <div class="bg-cyan-500 h-2 rounded-full" style="width: 92%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs text-yellow-500 font-bold mb-1">
-                            <span>Structure Integrity (RWE)</span>
-                            <span>74% (Check System)</span>
-                        </div>
-                        <div class="w-full bg-slate-900 rounded-full h-4 relative overflow-hidden border border-yellow-500/50">
-                            <!-- Striped warning pattern -->
-                            <div class="absolute inset-0 bg-yellow-600 h-4 rounded-full" style="width: 74%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Capabilities Footer -->
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-            <div class="p-4 rounded bg-slate-800 border border-slate-700 text-xs text-slate-400">
-                <span class="block text-white font-bold mb-1">Product Thinking</span>
-                Primary Specialisation
-            </div>
-            <div class="p-4 rounded bg-slate-800 border border-slate-700 text-xs text-slate-400">
-                <span class="block text-white font-bold mb-1">Systems Thinking</span>
-                Primary Specialisation
-            </div>
-            <div class="p-4 rounded bg-slate-800 border border-slate-700 text-xs text-slate-400">
-                <span class="block text-white font-bold mb-1">Tech Ethics</span>
-                Core Module
-            </div>
-            <div class="p-4 rounded bg-slate-800 border border-slate-700 text-xs text-slate-400">
-                <span class="block text-white font-bold mb-1">Empathic Envs</span>
-                Core Module
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="text-center py-8 text-slate-600 text-xs font-mono">
-        ZOE v.47.6.34 // SPECIFICATION SHEET // DO NOT DISTRIBUTE
-    </footer>
-
-    <!-- SCRIPT BLOCK -->
-    <script>
-        // --- UTILITIES ---
-        function wrapLabel(label, maxChars = 16) {
-            if (label.length <= maxChars) return label;
-            const words = label.split(' ');
-            const lines = [];
-            let currentLine = words[0];
-            for (let i = 1; i < words.length; i++) {
-                if ((currentLine + " " + words[i]).length <= maxChars) {
-                    currentLine += " " + words[i];
-                } else {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                }
-            }
-            lines.push(currentLine);
-            return lines;
-        }
-
-        const tooltipConfig = {
-            callbacks: {
-                title: function(tooltipItems) {
-                    const item = tooltipItems[0];
-                    let label = item.chart.data.labels[item.dataIndex];
-                    return Array.isArray(label) ? label.join(' ') : label;
-                }
-            }
-        };
-
-        // --- CHART 1: RADAR CHART (The Architecture) ---
-        const ctxRadar = document.getElementById('radarChart').getContext('2d');
-        
-        // Labels mapped to acronyms
-        const radarLabels = [
-            'Cognitive Versatility (CVI)', 
-            'Synthesis Depth (SDS)', 
-            'Generative Insight (GIR)', 
-            'Adaptive Framing (APF)', 
-            'Emotional Coherence (ECB)', 
-            'Meta-Awareness (MAT)', 
-            'Creative Latency (CPL)', 
-            'Discernment Bandwidth (DBW)', 
-            'Learning Momentum (LMS)', 
-            'Resilience (RWE)'
-        ].map(l => wrapLabel(l));
-
-        new Chart(ctxRadar, {
-            type: 'radar',
-            data: {
-                labels: radarLabels,
-                datasets: [{
-                    label: 'Zoe v.47 Capabilities',
-                    data: [92, 95, 89, 91, 97, 88, 94, 93, 98, 74],
-                    fill: true,
-                    backgroundColor: 'rgba(6, 182, 212, 0.2)', // Cyan transparent
-                    borderColor: '#06b6d4', // Cyan solid
-                    pointBackgroundColor: [
-                        '#06b6d4', '#06b6d4', '#06b6d4', '#06b6d4', 
-                        '#d946ef', '#d946ef', // Emotion gets Fuchsia
-                        '#06b6d4', '#06b6d4', '#22c55e', '#eab308' // Green for Learning, Yellow for Resilience
-                    ],
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#06b6d4'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                elements: {
-                    line: { borderWidth: 3 }
-                },
-                scales: {
-                    r: {
-                        angleLines: { color: '#334155' },
-                        grid: { color: '#334155' },
-                        pointLabels: {
-                            color: '#94a3b8',
-                            font: { size: 11, family: 'monospace' }
-                        },
-                        ticks: {
-                            backdropColor: 'transparent',
-                            color: '#64748b',
-                            z: 1
-                        },
-                        min: 50,
-                        max: 100
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: tooltipConfig
-                }
-            }
-        });
-
-        // --- CHART 2: PLOTLY NETWORK (Synthesis Depth) ---
-        // Visualizing the Heidegger -> Strategy chain
-        const nodes = [
-            {id: 0, label: "Human Systems", x: 0.1, y: 0.5, color: '#94a3b8'},
-            {id: 1, label: "Team Cultural Dynamics", x: 0.3, y: 0.7, color: '#06b6d4'},
-            {id: 2, label: "Systems & Economics", x: 0.5, y: 0.3, color: '#06b6d4'},
-            {id: 3, label: "Identity Formation", x: 0.5, y: 0.7, color: '#06b6d4'},
-            {id: 4, label: "Acceleration of Tech", x: 0.7, y: 0.5, color: '#d946ef'},
-            {id: 5, label: "Product Strategy", x: 0.9, y: 0.5, color: '#ffffff'}
-        ];
-
-        const edgeX = [];
-        const edgeY = [];
-        
-        // Define paths: 0->1, 1->2, 1->3, 2->4, 3->4, 4->5
-        const links = [[0,1], [1,2], [1,3], [2,4], [3,4], [4,5]];
-
-        links.forEach(link => {
-            const start = nodes[link[0]];
-            const end = nodes[link[1]];
-            edgeX.push(start.x, end.x, null);
-            edgeY.push(start.y, end.y, null);
-        });
-
-        const edgeTrace = {
-            x: edgeX, y: edgeY,
-            mode: 'lines',
-            line: { width: 2, color: '#475569' }, // Slate 600
-            hoverinfo: 'none',
-            type: 'scatter'
-        };
-
-        const nodeTrace = {
-            x: nodes.map(n => n.x),
-            y: nodes.map(n => n.y),
-            mode: 'markers+text',
-            text: nodes.map(n => n.label),
-            textposition: 'top center',
-            textfont: { color: '#f8fafc' },
-            marker: {
-                size: 20,
-                color: nodes.map(n => n.color),
-                line: { width: 2, color: '#1e293b' }
-            },
-            type: 'scatter',
-            hoverinfo: 'text'
-        };
-
-        const layoutNetwork = {
-            title: { text: 'Synthesis Pathway Simulation', font: {color: '#94a3b8'} },
-            showlegend: false,
-            paper_bgcolor: 'rgba(0,0,0,0)',
-            plot_bgcolor: 'rgba(0,0,0,0)',
-            margin: {b: 0, l: 0, r: 0, t: 40},
-            xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [0, 1] },
-            yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [0.2, 0.8] },
-            hovermode: 'closest'
-        };
-
-        Plotly.newPlot('synthesisGraph', [edgeTrace, nodeTrace], layoutNetwork, {responsive: true, displayModeBar: false});
-
-        // --- CHART 3: LINE CHART (Learning Momentum) ---
-        const ctxLearning = document.getElementById('learningChart').getContext('2d');
-        
-        new Chart(ctxLearning, {
-            type: 'line',
-            data: {
-                labels: ['Junior', 'Mid-Level', 'Senior', 'Lead', 'Principal', 'Current (v.47)'],
-                datasets: [
-                    {
-                        label: 'Zoe v.47 (Accelerating)',
-                        data: [20, 35, 55, 75, 90, 98],
-                        borderColor: '#22c55e', // Green
-                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'Standard Cohort Baseline',
-                        data: [20, 40, 60, 70, 72, 70], // Plateau/Decay
-                        borderColor: '#64748b', // Slate
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        tension: 0.4,
-                        pointRadius: 0
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { labels: { color: '#cbd5e1' } },
-                    tooltip: tooltipConfig,
-                    title: {
-                        display: true,
-                        text: 'Learning Momentum vs Time',
-                        color: '#94a3b8'
-                    }
-                },
-                scales: {
-                    y: {
-                        grid: { color: '#334155' },
-                        ticks: { color: '#94a3b8' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#94a3b8' }
-                    }
-                }
-            }
-        });
-
-    </script>
+  <footer>
+    <div class="container">
+    <a class="button secondary" href="#top">Back to top</a>
+    </div>
+  </footer>
 </body>
-
 </html>
-
-
-
-
